@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+{% load i18n %}
+<h1>{% trans "Site Details"%} - {{ name }}</h1>
+{% if siteValues %}
+    <table class="table">
+        <thead>
+            <tr>
+                <td><strong>{% trans "Date"%}</strong></td>
+                <td><strong>{% trans "A Value"%}</strong></td>
+                <td><strong>{% trans "B Balue"%}</strong></td>
+            </tr>
+        </thead>
+            {% for siteValue in siteValues %}
+            <tr>
+                <td>{{ siteValue.createdDate|date:'M d, Y' }}</td>
+                <td>{{ siteValue.aValue }}</td>
+                <td>{{ siteValue.bValue }}</td>
+            </tr>
+            {% endfor %}
+    </table>
+{% endif %}
+{% endblock %}

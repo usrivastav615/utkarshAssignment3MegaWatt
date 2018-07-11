@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+{% load i18n %}
+
+    <h1>{% trans "Summary"%}</h1>
+
+      <a href="{% url 'getSumOfSiteValues' %}"><button type="button" class="btn btn-primary{% if summary == 'summation' %} active{% endif %}">{% trans "Sum"%}</button></a>
+      <a href="{% url 'getAverageOfSiteValues' %}"><button type="button" class="btn btn-primary{% if summary == 'average' %} active{% endif %}">{% trans "Average"%}</button></a>
+
+    {% if sitesSummary %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <td><strong>{% trans "Site"%}</strong></td>
+                    <td><strong>{% trans "A Value"%}</strong></td>
+                    <td><strong>{% trans "B Value"%}</strong></td>
+                </tr>
+            </thead>
+
+        {% for siteSummary in sitesSummary %}
+            <tr>
+                <td>{{ siteSummary.name }}</td>
+                <td>{{ siteSummary.aggregateAValue|floatformat:2 }}</td>
+                <td>{{ siteSummary.aggregateBValue|floatformat:2 }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+       <br/>
+       <br/>
+       <div class="alert alert-info" role="alert">
+            {% trans "No data available."%}
+        </div>
+    {% endif %}
+{% endblock %}
