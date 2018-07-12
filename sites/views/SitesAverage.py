@@ -13,15 +13,12 @@ class SitesAverage(ListView):
                                 self.get_context_data())
 
     def get_context_data(self):
-
         sites = []
         try:
             sites = Site.allSites.raw(self.RAW_QUERY_AVERAGE_OF_SITE_VALUES)
         except Exception as e:
             pass
-
         return {
             'sitesSummary': sites,
             'summary': 'average',
         }
-
